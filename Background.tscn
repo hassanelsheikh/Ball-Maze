@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcfnvxr3by5xm"]
+
+[ext_resource type="Texture2D" uid="uid://do8ui7bwgtbw2" path="res://Maze-PNG-Image-File.png" id="1_l3thc"]
+
+[node name="Background" type="Node2D"]
+
+[node name="Maze-png-image-file" type="Sprite2D" parent="."]
+position = Vector2(324.5, 323.5)
+scale = Vector2(1.27148, 1.27148)
+texture = ExtResource("1_l3thc")
