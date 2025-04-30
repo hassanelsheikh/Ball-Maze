@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://co6k7xlgypv3e"]
+
+[ext_resource type="Texture2D" uid="uid://c3hy23b6kn5u6" path="res://background/ChatGPT Image Apr 29, 2025, 06_43_08 PM.png" id="1_tt5f1"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="ChatGptImageApr29,2025,064308Pm" type="Sprite2D" parent="."]
+position = Vector2(580, 259)
+scale = Vector2(0.753418, 0.753418)
+texture = ExtResource("1_tt5f1")
