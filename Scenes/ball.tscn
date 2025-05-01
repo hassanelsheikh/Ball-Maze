@@ -1,7 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://dm1ytqkid8yg6"]
+[gd_scene load_steps=20 format=3 uid="uid://dm1ytqkid8yg6"]
 
 [ext_resource type="Script" uid="uid://c2mw4w8huw0h5" path="res://Scenes/character_body_2d.gd" id="1_ij5cq"]
 [ext_resource type="Texture2D" uid="uid://cq3pxcq36jnjh" path="res://background/sprite_sheet_transparent.png" id="2_376qj"]
+[ext_resource type="AudioStream" uid="uid://cmqwva0rortbt" path="res://Audios/plastic-hit-2-90119.mp3" id="3_376qj"]
+[ext_resource type="AudioStream" uid="uid://b4hxvf3ysk164" path="res://Audios/swipe-255512.mp3" id="4_yk4cr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j5yw3"]
 atlas = ExtResource("2_376qj")
@@ -109,7 +111,6 @@ radius = 28.0714
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_ij5cq")
-bounce_factor = 2.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 position = Vector2(377.5, 327.5)
@@ -119,5 +120,11 @@ sprite_frames = SubResource("SpriteFrames_aw2wy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(378, 327)
 rotation = -0.0554937
-scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_vblhy")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("3_376qj")
+
+[node name="swipe" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("4_yk4cr")
+volume_db = 6.559

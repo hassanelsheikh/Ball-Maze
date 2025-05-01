@@ -3,10 +3,6 @@ extends CharacterBody2D
 var swipe_start := Vector2.ZERO
 var swipe_end := Vector2.ZERO
 var is_swiping := false
-var initial_swipe := false
-
-signal bounce_count_changed
-var bounce_count := 0
 
 @export var swipe_force_multiplier := 10000.0
 @export var gravity := 980.0
@@ -14,10 +10,8 @@ var bounce_count := 0
 
 func _unhandled_input(event):
 	if event is InputEventScreenTouch or event is InputEventMouseButton:
-		initial_swipe = true
 		if event.pressed:
 			swipe_start = event.position
-			$swipe.play()
 			is_swiping = true
 		else:
 			swipe_end = event.position
@@ -44,15 +38,10 @@ func _physics_process(delta):
 		velocity = velocity.bounce(collision.get_normal())
 		var normal = collision.get_normal()	
 		var impact_strength = velocity.dot(normal)
-
 		
 		if impact_strength > 30:
 			var volume = clamp(impact_strength * 0.005, 0, 20)  # Map to decibels
 			$AudioStreamPlayer2D.volume_db = volume	
 			$AudioStreamPlayer2D.play()
-			print(bounce_count)
-			if initial_swipe:
-				bounce_count +=1
-				emit_signal("bounce_count_changed", bounce_count) 
 		else:
 			$AudioStreamPlayer2D.stop()
