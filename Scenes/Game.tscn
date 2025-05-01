@@ -1,109 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://bu0scf7ecafbm"]
+[gd_scene load_steps=3 format=3 uid="uid://bu0scf7ecafbm"]
 
 [ext_resource type="Texture2D" uid="uid://8ebtsgj3urs" path="res://background/level1.png" id="1_iukft"]
-[ext_resource type="Texture2D" uid="uid://cq3pxcq36jnjh" path="res://background/sprite_sheet_transparent.png" id="2_gl6un"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j5yw3"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(0, 0, 154, 154)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kldst"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(154, 0, 154, 154)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b2bpf"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(308, 0, 154, 154)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7lihs"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(462, 0, 154, 154)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fgofq"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(616, 0, 154, 154)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2irst"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(770, 0, 154, 154)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bf53h"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(924, 0, 154, 154)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_71axn"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(1078, 0, 154, 154)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dahhg"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(1232, 0, 154, 154)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3so38"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(1386, 0, 154, 154)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3cx6b"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(1540, 0, 154, 154)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wxwew"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(1694, 0, 154, 154)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_acvyw"]
-atlas = ExtResource("2_gl6un")
-region = Rect2(1848, 0, 154, 154)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_alh3a"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j5yw3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kldst")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b2bpf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7lihs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fgofq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2irst")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bf53h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_71axn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dahhg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3so38")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3cx6b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wxwew")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_acvyw")
-}],
-"loop": true,
-"name": &"default",
-"speed": 30.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_gl6un"]
-radius = 75.6492
+[ext_resource type="PackedScene" uid="uid://dm1ytqkid8yg6" path="res://Scenes/ball.tscn" id="2_gl6un"]
 
 [node name="Game" type="Node2D"]
 
@@ -112,25 +10,12 @@ position = Vector2(624, 277)
 scale = Vector2(0.813477, 0.813477)
 texture = ExtResource("1_iukft")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-physics_interpolation_mode = 1
-position = Vector2(350, 459)
-scale = Vector2(0.37013, 0.37013)
-sprite_frames = SubResource("SpriteFrames_alh3a")
-frame = 12
-frame_progress = 0.63319
-
-[node name="RigidBody2D" type="RigidBody2D" parent="AnimatedSprite2D"]
-mass = 15.459
-gravity_scale = 9.8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/RigidBody2D"]
-physics_interpolation_mode = 1
-shape = SubResource("CircleShape2D_gl6un")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/StaticBody2D"]
 polygon = PackedVector2Array(274, 49, 846, 50, 846, 262, 821, 262, 821, 76, 299, 75, 300, 551, 821, 549, 824, 342, 845, 344, 846, 574, 275, 574)
+
+[node name="Ball" parent="." instance=ExtResource("2_gl6un")]
+position = Vector2(-21, 181)
