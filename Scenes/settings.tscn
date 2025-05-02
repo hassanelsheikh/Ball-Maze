@@ -1,0 +1,144 @@
+[gd_scene load_steps=7 format=3 uid="uid://b1xiro8eg3djs"]
+
+[ext_resource type="FontFile" uid="uid://10m5ajyiwqq" path="res://Fonts/RUSSOONE-REGULAR.TTF" id="1_4geyq"]
+[ext_resource type="Script" uid="uid://dijoar1rq5bt5" path="res://Scenes/settings.gd" id="1_i44u3"]
+[ext_resource type="Texture2D" uid="uid://rq3es4rm4dov" path="res://background/background2.png" id="2_lhmql"]
+[ext_resource type="Texture2D" uid="uid://cq3pxcq36jnjh" path="res://background/sprite_sheet_transparent.png" id="4_aaqfp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2dne"]
+atlas = ExtResource("4_aaqfp")
+region = Rect2(0, 0, 154, 154)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6kysc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2dne")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i44u3")
+
+[node name="Color" type="Label" parent="."]
+offset_left = 236.0
+offset_top = 317.0
+offset_right = 385.0
+offset_bottom = 354.0
+theme_override_fonts/font = ExtResource("1_4geyq")
+theme_override_font_sizes/font_size = 30
+text = "Ball Color"
+
+[node name="Background2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.223529)
+show_behind_parent = true
+position = Vector2(618, 304)
+scale = Vector2(0.896484, 0.896484)
+texture = ExtResource("2_lhmql")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 652.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -48
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_4geyq")
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="exit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("1_4geyq")
+theme_override_font_sizes/font_size = 20
+text = "Exit"
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 2
+offset_left = 606.0
+offset_top = 197.0
+offset_right = 872.0
+offset_bottom = 263.0
+min_value = 0.1
+max_value = 3.0
+step = 0.05
+value = 0.1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 212.0
+offset_right = 306.0
+offset_bottom = 235.0
+theme_override_fonts/font = ExtResource("1_4geyq")
+theme_override_font_sizes/font_size = 30
+text = "Ball Size"
+
+[node name="Label" type="Label" parent="Label"]
+offset_left = -19.0
+offset_top = 201.0
+offset_right = 162.0
+offset_bottom = 238.0
+theme_override_fonts/font = ExtResource("1_4geyq")
+theme_override_font_sizes/font_size = 30
+text = "Background"
+
+[node name="PreviewBall" type="CharacterBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PreviewBall"]
+position = Vector2(550, 524)
+scale = Vector2(0.448052, 0.448052)
+sprite_frames = SubResource("SpriteFrames_6kysc")
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 609.0
+offset_top = 320.0
+offset_right = 866.0
+offset_bottom = 350.0
+selected = 0
+item_count = 3
+popup/item_0/text = "Blue"
+popup/item_0/id = 0
+popup/item_1/text = "Red"
+popup/item_1/id = 1
+popup/item_2/text = "Green"
+popup/item_2/id = 2
+
+[node name="OptionButton2" type="OptionButton" parent="."]
+offset_left = 612.0
+offset_top = 416.0
+offset_right = 869.0
+offset_bottom = 447.0
+item_count = 3
+popup/item_0/text = "Original"
+popup/item_0/id = 0
+popup/item_1/text = "Space"
+popup/item_1/id = 1
+popup/item_2/text = "Sky"
+popup/item_2/id = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/exit" to="." method="_on_exit_pressed"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="OptionButton2" to="." method="_on_option_button_2_item_selected"]

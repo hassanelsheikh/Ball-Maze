@@ -1,10 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://co6k7xlgypv3e"]
+[gd_scene load_steps=3 format=3 uid="uid://co6k7xlgypv3e"]
 
-[ext_resource type="Texture2D" uid="uid://c3hy23b6kn5u6" path="res://background/ChatGPT Image Apr 29, 2025, 06_43_08 PM.png" id="1_tt5f1"]
+[ext_resource type="Script" uid="uid://t1k2shxxyr84" path="res://scripts/main_menu.gd" id="1_853f1"]
+[ext_resource type="Texture2D" uid="uid://c3hy23b6kn5u6" path="res://background/background.png" id="1_tt5f1"]
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource("1_853f1")
 
-[node name="ChatGptImageApr29,2025,064308Pm" type="Sprite2D" parent="."]
+[node name="background" type="Sprite2D" parent="."]
 position = Vector2(580, 259)
 scale = Vector2(0.753418, 0.753418)
 texture = ExtResource("1_tt5f1")
+
+[node name="Play" type="Button" parent="."]
+offset_left = 394.0
+offset_top = 313.0
+offset_right = 670.0
+offset_bottom = 391.0
+flat = true
+
+[node name="Settings" type="Button" parent="."]
+offset_left = 392.0
+offset_top = 412.0
+offset_right = 668.0
+offset_bottom = 490.0
+flat = true
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 394.0
+offset_top = 508.0
+offset_right = 669.0
+offset_bottom = 587.0
+flat = true
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]

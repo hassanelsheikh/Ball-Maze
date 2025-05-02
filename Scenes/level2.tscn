@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://dtwduuriw0y46"]
+
+[ext_resource type="Script" uid="uid://cv27i76oamne3" path="res://Scenes/level_2.gd" id="1_1k4by"]
+[ext_resource type="Texture2D" uid="uid://b5qdlft1p2aph" path="res://background/level2_box.png" id="2_1k4by"]
+[ext_resource type="AudioStream" uid="uid://cfbhxhmkrppbt" path="res://Audios/on-the-road-to-the-eighties_loop1-177567.mp3" id="4_dlanv"]
+[ext_resource type="Texture2D" uid="uid://bglynabflssi2" path="res://background/star-explosion.png" id="5_onqnr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ckivy"]
+size = Vector2(32, 77)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_onqnr"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+
+[node name="level2" type="Node2D"]
+script = ExtResource("1_1k4by")
+
+[node name="Level2Box" type="Sprite2D" parent="."]
+position = Vector2(544, 332)
+scale = Vector2(0.948242, 0.948242)
+texture = ExtResource("2_1k4by")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level2Box"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level2Box/StaticBody2D"]
+polygon = PackedVector2Array(-355.394, -319.539, 335.357, -318.484, 337.466, -50.62, 300.556, -51.6746, 300.556, -283.683, -323.757, -284.737, -321.648, -54.8383, 143.423, -53.7838, 143.423, -17.9279, -120.222, -17.9279, -322.702, -17.9279, -320.593, 266.809, 300.556, 266.809, 300.556, 25.31, 335.357, 25.31, 336.412, 302.665, -360.667, 302.665)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(886, 321)
+shape = SubResource("RectangleShape2D_ckivy")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dlanv")
+volume_db = -0.57
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+position = Vector2(593, 406)
+scale = Vector2(0.78, 0.78)
+amount = 3
+texture = ExtResource("5_onqnr")
+lifetime = 0.1
+interp_to_end = 0.025
+speed_scale = 6.38
+explosiveness = 0.43
+randomness = 0.5
+trail_lifetime = 2.52
+process_material = SubResource("ParticleProcessMaterial_onqnr")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

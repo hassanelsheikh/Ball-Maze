@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://dm1ytqkid8yg6"]
+[gd_scene load_steps=22 format=3 uid="uid://dm1ytqkid8yg6"]
 
-[ext_resource type="Script" uid="uid://c2mw4w8huw0h5" path="res://Scenes/character_body_2d.gd" id="1_ij5cq"]
+[ext_resource type="Script" uid="uid://c2mw4w8huw0h5" path="res://scripts/character_body_2d.gd" id="1_ij5cq"]
 [ext_resource type="Texture2D" uid="uid://cq3pxcq36jnjh" path="res://background/sprite_sheet_transparent.png" id="2_376qj"]
 [ext_resource type="AudioStream" uid="uid://cmqwva0rortbt" path="res://Audios/plastic-hit-2-90119.mp3" id="3_376qj"]
 [ext_resource type="AudioStream" uid="uid://b4hxvf3ysk164" path="res://Audios/swipe-255512.mp3" id="4_yk4cr"]
+[ext_resource type="Texture2D" uid="uid://bckhb706emor6" path="res://collide.png" id="5_aw2wy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j5yw3"]
 atlas = ExtResource("2_376qj")
@@ -105,7 +106,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vblhy"]
-radius = 28.0714
+radius = 23.0217
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vblhy"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 0.1
+scale_max = 0.15
 
 [node name="Ball" type="Node2D"]
 
@@ -113,12 +120,12 @@ radius = 28.0714
 script = ExtResource("1_ij5cq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
-position = Vector2(377.5, 327.5)
-scale = Vector2(0.37013, 0.37013)
+position = Vector2(383, 333)
+scale = Vector2(0.298701, 0.298701)
 sprite_frames = SubResource("SpriteFrames_aw2wy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(378, 327)
+position = Vector2(383, 333)
 rotation = -0.0554937
 shape = SubResource("CircleShape2D_vblhy")
 
@@ -128,3 +135,14 @@ stream = ExtResource("3_376qj")
 [node name="swipe" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
 stream = ExtResource("4_yk4cr")
 volume_db = 6.559
+
+[node name="LightningParticles" type="GPUParticles2D" parent="CharacterBody2D"]
+emitting = false
+sub_emitter = NodePath(".")
+texture = ExtResource("5_aw2wy")
+lifetime = 0.01
+one_shot = true
+speed_scale = 14.57
+explosiveness = 0.53
+randomness = 0.75
+process_material = SubResource("ParticleProcessMaterial_vblhy")
