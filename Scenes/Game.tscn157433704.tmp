@@ -1,0 +1,134 @@
+[gd_scene load_steps=12 format=3 uid="uid://bu0scf7ecafbm"]
+
+[ext_resource type="Script" uid="uid://bc4mntd45si7r" path="res://scripts/game.gd" id="1_j5yw3"]
+[ext_resource type="Texture2D" uid="uid://bk0un6s06ot1a" path="res://background/level_bg.png" id="2_2irst"]
+[ext_resource type="Texture2D" uid="uid://dc6flanlcxpyq" path="res://background/sky.png" id="2_71axn"]
+[ext_resource type="Texture2D" uid="uid://cbnw7o6x4kfgv" path="res://background/space.png" id="2_bf53h"]
+[ext_resource type="PackedScene" uid="uid://dm1ytqkid8yg6" path="res://Scenes/ball.tscn" id="2_gl6un"]
+[ext_resource type="Texture2D" uid="uid://nepovl688k4b" path="res://background/level1_box.png" id="4_bf53h"]
+[ext_resource type="FontFile" uid="uid://10m5ajyiwqq" path="res://Fonts/RUSSOONE-REGULAR.TTF" id="4_kldst"]
+[ext_resource type="AudioStream" uid="uid://djmmvraohonxq" path="res://Audios/ding-sfx-330333.mp3" id="5_b2bpf"]
+[ext_resource type="PackedScene" uid="uid://dtwduuriw0y46" path="res://Scenes/level2.tscn" id="6_7lihs"]
+[ext_resource type="AudioStream" uid="uid://cfbhxhmkrppbt" path="res://Audios/on-the-road-to-the-eighties_loop1-177567.mp3" id="7_fgofq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5yw3"]
+size = Vector2(20, 83)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_j5yw3")
+
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(1121, 334)
+scale = Vector2(1.64063, 1.05859)
+texture = ExtResource("2_71axn")
+
+[node name="Space" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(588, 329)
+scale = Vector2(1.1748, 1.1748)
+texture = ExtResource("2_bf53h")
+
+[node name="LevelBg" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(577, 345)
+scale = Vector2(1.27539, 1.27539)
+texture = ExtResource("2_2irst")
+
+[node name="level2" parent="." instance=ExtResource("6_7lihs")]
+visible = false
+
+[node name="level1" type="Sprite2D" parent="."]
+position = Vector2(593, 307)
+scale = Vector2(0.938477, 0.847656)
+texture = ExtResource("4_bf53h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/StaticBody2D"]
+polygon = PackedVector2Array(263, 47, 859, 46, 858, 262, 821, 262, 821, 76, 299, 75, 300, 551, 822, 549, 826, 350, 859, 349, 859, 583, 263, 579)
+
+[node name="WinZone" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/WinZone"]
+position = Vector2(873, 305)
+shape = SubResource("RectangleShape2D_j5yw3")
+
+[node name="Ball" parent="." instance=ExtResource("2_gl6un")]
+position = Vector2(-17, 117)
+
+[node name="Win" type="Label" parent="."]
+offset_left = 454.0
+offset_top = 282.0
+offset_right = 675.0
+offset_bottom = 343.0
+theme_override_fonts/font = ExtResource("4_kldst")
+theme_override_font_sizes/font_size = 56
+text = "You Win!"
+
+[node name="Timer" type="Label" parent="."]
+offset_left = 934.0
+offset_top = 26.0
+offset_right = 1038.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("4_kldst")
+theme_override_font_sizes/font_size = 30
+text = "Timer: "
+
+[node name="Bounces" type="Label" parent="."]
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 160.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("4_kldst")
+theme_override_font_sizes/font_size = 30
+text = "Bounces: "
+
+[node name="Score" type="Label" parent="."]
+visible = false
+offset_left = 475.0
+offset_top = 367.0
+offset_right = 610.0
+offset_bottom = 417.0
+theme_override_fonts/font = ExtResource("4_kldst")
+theme_override_font_sizes/font_size = 40
+text = "SCORE"
+
+[node name="WinSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_b2bpf")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1038.0
+offset_top = 603.0
+offset_right = 1146.0
+offset_bottom = 645.0
+theme_override_fonts/font = ExtResource("4_kldst")
+theme_override_font_sizes/font_size = 23
+text = "Restart"
+
+[node name="Exit" type="Button" parent="."]
+offset_left = 8.0
+offset_top = 610.0
+offset_right = 90.0
+offset_bottom = 649.0
+theme_override_fonts/font = ExtResource("4_kldst")
+theme_override_font_sizes/font_size = 23
+text = "Exit"
+
+[node name="Next" type="Button" parent="."]
+offset_left = 482.0
+offset_top = 470.0
+offset_right = 663.0
+offset_bottom = 520.0
+theme_override_fonts/font = ExtResource("4_kldst")
+theme_override_font_sizes/font_size = 30
+text = "Level 2"
+
+[node name="end_music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_fgofq")
+
+[connection signal="body_entered" from="Sprite2D/WinZone" to="." method="_on_win_zone_body_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]

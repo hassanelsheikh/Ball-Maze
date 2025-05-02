@@ -101,16 +101,15 @@ func _physics_process(delta):
 
 		
 		if impact_strength > 50:
-			# Show lightning at collision point
-			$LightningParticles.global_position = collision_position
-			$LightningParticles.emitting = false  # reset if already playing
-			$LightningParticles.emitting = true   # trigger lightning burst
 			var volume = clamp(impact_strength * 0.005, 0, 20)  # Map to decibels
 			$AudioStreamPlayer2D.volume_db = volume	
 			$AudioStreamPlayer2D.play()
-			print(bounce_count)
 			if initial_swipe:
 				bounce_count +=1
 				emit_signal("bounce_count_changed", bounce_count) 
+				# Show lightning at collision point
+				$LightningParticles.global_position = collision_position
+				$LightningParticles.emitting = false  # reset if already playing
+				$LightningParticles.emitting = true   # trigger lightning burst
 		else:
 			$AudioStreamPlayer2D.stop()

@@ -30,6 +30,7 @@ grow_vertical = 2
 script = ExtResource("1_i44u3")
 
 [node name="Color" type="Label" parent="."]
+layout_mode = 0
 offset_left = 236.0
 offset_top = 317.0
 offset_right = 385.0
@@ -95,6 +96,7 @@ theme_override_font_sizes/font_size = 30
 text = "Ball Size"
 
 [node name="Label" type="Label" parent="Label"]
+layout_mode = 0
 offset_left = -19.0
 offset_top = 201.0
 offset_right = 162.0
@@ -126,6 +128,7 @@ popup/item_2/text = "Green"
 popup/item_2/id = 2
 
 [node name="OptionButton2" type="OptionButton" parent="."]
+layout_mode = 0
 offset_left = 612.0
 offset_top = 416.0
 offset_right = 869.0

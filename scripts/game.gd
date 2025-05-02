@@ -39,6 +39,7 @@ func win_game(finish = false) -> void:
 	print(score)
 	$Score.show()
 	$Score.text = "SCORE: %.0f" % score
+	$Ball/CharacterBody2D.initial_swipe = false
 	if !finish:
 		$Next.show()
 		$end_music.play()
@@ -128,6 +129,7 @@ func _on_next_pressed() -> void:
 	win_label.hide()
 	$Score.hide()
 	$Next.hide()
+	$Ball/CharacterBody2D.initial_swipe = false
 
 	# Reset UI
 	bounce_label.text = "Bounces: 0"
