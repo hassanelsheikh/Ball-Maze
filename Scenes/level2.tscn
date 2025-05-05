@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dtwduuriw0y46"]
 
-[ext_resource type="Script" uid="uid://cv27i76oamne3" path="res://Scenes/level_2.gd" id="1_1k4by"]
+[ext_resource type="Script" path="res://Scenes/level_2.gd" id="1_1k4by"]
 [ext_resource type="Texture2D" uid="uid://b5qdlft1p2aph" path="res://background/level2_box.png" id="2_1k4by"]
 [ext_resource type="Texture2D" uid="uid://bglynabflssi2" path="res://background/star-explosion.png" id="5_onqnr"]
 

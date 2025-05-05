@@ -20,9 +20,8 @@ size = Vector2(20, 83)
 script = ExtResource("1_j5yw3")
 
 [node name="Sky" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(1121, 334)
-scale = Vector2(1.64063, 1.05859)
+position = Vector2(1121, 220.499)
+scale = Vector2(1.64063, 1.28027)
 texture = ExtResource("2_71axn")
 
 [node name="Space" type="Sprite2D" parent="."]
@@ -32,6 +31,7 @@ scale = Vector2(1.1748, 1.1748)
 texture = ExtResource("2_bf53h")
 
 [node name="LevelBg" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(577, 345)
 scale = Vector2(1.27539, 1.27539)
 texture = ExtResource("2_2irst")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://do70wbchjhhuj"]
 
-[ext_resource type="Script" uid="uid://c4qdmfdanucv7" path="res://Scenes/pause.gd" id="1_e0jm0"]
+[ext_resource type="Script" path="res://Scenes/pause.gd" id="1_e0jm0"]
 [ext_resource type="FontFile" uid="uid://10m5ajyiwqq" path="res://Fonts/RUSSOONE-REGULAR.TTF" id="1_o80xk"]
 [ext_resource type="Texture2D" uid="uid://cq3pxcq36jnjh" path="res://background/sprite_sheet_transparent.png" id="3_e0jm0"]
 
@@ -29,6 +29,7 @@ grow_vertical = 2
 script = ExtResource("1_e0jm0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = 1.00006
 offset_top = -1.99994
 offset_right = 1155.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://0plndg8uwsry"]
 
-[ext_resource type="Script" uid="uid://chmcpof4xca4i" path="res://Scenes/level_3.gd" id="1_d77hw"]
+[ext_resource type="Script" path="res://Scenes/level_3.gd" id="1_d77hw"]
 [ext_resource type="AudioStream" uid="uid://cfbhxhmkrppbt" path="res://Audios/on-the-road-to-the-eighties_loop1-177567.mp3" id="3_mrxql"]
 [ext_resource type="Texture2D" uid="uid://o8rqfcpvwrou" path="res://background/level3_box.png" id="4_d77hw"]
 [ext_resource type="Texture2D" uid="uid://bglynabflssi2" path="res://background/star-explosion.png" id="4_qrg6c"]

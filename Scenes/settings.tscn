@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b1xiro8eg3djs"]
 
 [ext_resource type="FontFile" uid="uid://10m5ajyiwqq" path="res://Fonts/RUSSOONE-REGULAR.TTF" id="1_4geyq"]
-[ext_resource type="Script" uid="uid://dijoar1rq5bt5" path="res://Scenes/settings.gd" id="1_i44u3"]
+[ext_resource type="Script" path="res://Scenes/settings.gd" id="1_i44u3"]
 [ext_resource type="Texture2D" uid="uid://rq3es4rm4dov" path="res://background/background2.png" id="2_lhmql"]
 [ext_resource type="Texture2D" uid="uid://cq3pxcq36jnjh" path="res://background/sprite_sheet_transparent.png" id="4_aaqfp"]
 
