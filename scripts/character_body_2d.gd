@@ -15,29 +15,36 @@ var bounce_count := 0
 @export var bounce_factor := 0.8  # 1.0 = perfect bounce, < 1.0 = energy loss
 
 
-func _ready():
+func initialize():
+	bounce_count = 0
 	var original_sprite_scale = Vector2(0.299, 0.299)
 	$AnimatedSprite2D.modulate = Settings.ball_color
 	var corridor_height = get_parent().get_parent().get_collision_height()
-	
+
+	# Always duplicate to ensure unique shape
+	$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate()
 	var shape = $CollisionShape2D.shape as CircleShape2D
-	original_radius = shape.radius  # Get the actual radius from the scene
-	# Calculate max allowed ball diameter (110% rule)
-	var max_ball_diameter = corridor_height / 1.3
 
-	# Compute the current ball diameter
+	# Set original_radius only once
+	if original_radius < 0.0:
+		original_radius = shape.radius
+
+	var max_ball_diameter = corridor_height / 1.5
 	var current_diameter = original_radius * 2
-
-	# Calculate max allowed scale
 	var max_scale = max_ball_diameter / current_diameter
 	var s = clamp(Settings.ball_scale, 0.1, max_scale)
 
-	# Apply scale
 	$AnimatedSprite2D.scale = original_sprite_scale * s
 	shape.radius = original_radius * s
-	
-	#Make the force of ball dynamic based on ball size
+
 	swipe_force_multiplier = swipe_force_multiplier / s
+	
+	
+
+func _ready():
+	var shape = $CollisionShape2D.shape as CircleShape2D
+	original_radius = shape.radius  # Get the actual radius from the scene
+	initialize()
 	
 	
 func _reset_size(corridor_height):
@@ -93,10 +100,24 @@ func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		var collision_position = collision.get_position()
-		#Collision effect
+		var collider := collision.get_collider()
+		var normal = collision.get_normal()
+		velocity = velocity.bounce(normal)
 
-		velocity = velocity.bounce(collision.get_normal())
-		var normal = collision.get_normal()	
+		# Apply tangential velocity from rotating surface if valid
+		if collider.name == "StaticBody2D_level2":
+			var center = collider.global_position
+			var to_ball = global_position - center
+			var angular_velocity = 1.0
+			var tangential_velocity = Vector2(-to_ball.y, to_ball.x).normalized() * to_ball.length() * angular_velocity * 0.4
+			
+			# First push the ball slightly out of the collider
+			position += normal * 2
+			
+			# Then apply the tangential velocity
+			velocity += tangential_velocity * delta
+		
+	
 		var impact_strength = velocity.dot(normal)
 
 		
@@ -113,3 +134,18 @@ func _physics_process(delta):
 				$LightningParticles.emitting = true   # trigger lightning burst
 		else:
 			$AudioStreamPlayer2D.stop()
+			
+		
+func apply_custom_scale():
+	var original_sprite_scale = Vector2(0.299, 0.299)
+	var shape = $CollisionShape2D.shape as CircleShape2D
+
+	$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate()
+	shape = $CollisionShape2D.shape
+
+	if original_radius < 0.0:
+		original_radius = shape.radius
+
+	var s = clamp(Settings.ball_scale, 0.1, 3.0)
+	$AnimatedSprite2D.scale = original_sprite_scale * s
+	shape.radius = original_radius * s

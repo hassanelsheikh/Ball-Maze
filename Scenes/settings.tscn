@@ -95,16 +95,6 @@ theme_override_fonts/font = ExtResource("1_4geyq")
 theme_override_font_sizes/font_size = 30
 text = "Ball Size"
 
-[node name="Label" type="Label" parent="Label"]
-layout_mode = 0
-offset_left = -19.0
-offset_top = 201.0
-offset_right = 162.0
-offset_bottom = 238.0
-theme_override_fonts/font = ExtResource("1_4geyq")
-theme_override_font_sizes/font_size = 30
-text = "Background"
-
 [node name="PreviewBall" type="CharacterBody2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PreviewBall"]
@@ -140,6 +130,16 @@ popup/item_1/text = "Space"
 popup/item_1/id = 1
 popup/item_2/text = "Sky"
 popup/item_2/id = 2
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 413.0
+offset_right = 404.0
+offset_bottom = 450.0
+theme_override_fonts/font = ExtResource("1_4geyq")
+theme_override_font_sizes/font_size = 30
+text = "Background"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/exit" to="." method="_on_exit_pressed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]

@@ -6,8 +6,8 @@ extends Node2D  # Make sure this matches your root node
 @onready var bounce_label = $Bounces
 var is_game_over := false
 var bounce_count := 0  
-var START_POS_X = -17.0
-var START_POS_Y = 100
+var START_POS_X = 100
+var START_POS_Y = 30
 
 
 
@@ -31,7 +31,7 @@ func get_collision_height(level2 = false) -> float:
 
 
 #Winning function
-func win_game(finish = false) -> void:
+func win_game(finish = false, final = false) -> void:
 	is_game_over = true
 	$WinSound.play()
 	win_label.show()
@@ -42,7 +42,9 @@ func win_game(finish = false) -> void:
 	$Ball/CharacterBody2D.initial_swipe = false
 	if !finish:
 		$Next.show()
+	if final:
 		$end_music.play()
+		
 
 
 func _ready() -> void:
@@ -51,8 +53,14 @@ func _ready() -> void:
 	ball_body.connect("bounce_count_changed", _on_ball_bounce)
 	$Next.hide()
 	$level2.hide()
-	$level2/Level2Box/StaticBody2D/CollisionPolygon2D.disabled = true
-	$level2/Area2D/CollisionShape2D.disabled = true
+	$level3.hide()
+	$level2/Level2Box/StaticBody2D_level2/CollisionPolygon2D.disabled = true
+	$level2/Level2Box/Area2D/CollisionShape2D.disabled = true
+	$level3/Level3Box/StaticBody2D/CollisionPolygon2D.disabled = true
+	$level3/Level3Box/Area2D/CollisionShape2D.disabled = true
+	
+	#Hide pause menu
+	$Pause2.hide()
 	
 	#Check Background Option
 	var background = Settings.background
@@ -131,26 +139,44 @@ func _on_next_pressed() -> void:
 	$Next.hide()
 	$Ball/CharacterBody2D.initial_swipe = false
 
-	# Reset UI
 	bounce_label.text = "Bounces: 0"
 	timer_label.text = "Time: 00:00"
 
-	# Reset ball position and velocity if needed
-	ball_body.position = Vector2(START_POS_X, START_POS_Y)  # Replace with actual start position
+	# Reset ball
+	ball_body.position = Vector2(START_POS_X, START_POS_Y)
 	if ball_body.has_method("set_velocity"):
 		ball_body.set_velocity(Vector2.ZERO)
 	elif ball_body.has_method("linear_velocity"):
 		ball_body.linear_velocity = Vector2.ZERO
-		
-	$level2/Level2Box/StaticBody2D/CollisionPolygon2D.disabled = false
-	$level2/Area2D/CollisionShape2D.disabled = false
+
+	# Enable level2 collisions (if going to level2)
+	$level2/Level2Box/StaticBody2D_level2/CollisionPolygon2D.disabled = false
+	$level2/Level2Box/Area2D/CollisionShape2D.disabled = false
+
+	# Disable win zone of current level
 	$Sprite2D/StaticBody2D/CollisionPolygon2D.disabled = true
 	$Sprite2D/WinZone/CollisionShape2D.disabled = true
-	
+
+	# Level management
+	if $level1.visible:
+		$level1.hide()
+		$level2.show()
+	elif $level2.visible:
+		$level2.hide()
+		$level3.show()
+		$level2/Level2Box/StaticBody2D_level2/CollisionPolygon2D.disabled = true
+		$level2/Level2Box/Area2D/CollisionShape2D.disabled = true
+		
+		$level3/Level3Box/StaticBody2D/CollisionPolygon2D.disabled = false
+		$level3/Level3Box/Area2D/CollisionShape2D.disabled = false
+	else:
+		print("No more levels")
+
+	$Ball/CharacterBody2D.initialize()
 
 
-	# Swap levels
-	$level1.hide()
-	$level2.show()
+func _on_pause_pressed() -> void:
+	get_tree().paused = true
+	$Pause2.show()
 	
 	

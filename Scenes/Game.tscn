@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bu0scf7ecafbm"]
+[gd_scene load_steps=14 format=3 uid="uid://bu0scf7ecafbm"]
 
 [ext_resource type="Script" uid="uid://bc4mntd45si7r" path="res://scripts/game.gd" id="1_j5yw3"]
 [ext_resource type="Texture2D" uid="uid://bk0un6s06ot1a" path="res://background/level_bg.png" id="2_2irst"]
@@ -10,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://djmmvraohonxq" path="res://Audios/ding-sfx-330333.mp3" id="5_b2bpf"]
 [ext_resource type="PackedScene" uid="uid://dtwduuriw0y46" path="res://Scenes/level2.tscn" id="6_7lihs"]
 [ext_resource type="AudioStream" uid="uid://cfbhxhmkrppbt" path="res://Audios/on-the-road-to-the-eighties_loop1-177567.mp3" id="7_fgofq"]
+[ext_resource type="PackedScene" uid="uid://do70wbchjhhuj" path="res://Scenes/pause.tscn" id="11_dahhg"]
+[ext_resource type="PackedScene" uid="uid://0plndg8uwsry" path="res://Scenes/level3.tscn" id="12_3so38"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5yw3"]
 size = Vector2(20, 83)
@@ -18,6 +20,7 @@ size = Vector2(20, 83)
 script = ExtResource("1_j5yw3")
 
 [node name="Sky" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1121, 334)
 scale = Vector2(1.64063, 1.05859)
 texture = ExtResource("2_71axn")
@@ -29,7 +32,6 @@ scale = Vector2(1.1748, 1.1748)
 texture = ExtResource("2_bf53h")
 
 [node name="LevelBg" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(577, 345)
 scale = Vector2(1.27539, 1.27539)
 texture = ExtResource("2_2irst")
@@ -41,6 +43,9 @@ visible = false
 position = Vector2(593, 307)
 scale = Vector2(0.938477, 0.847656)
 texture = ExtResource("4_bf53h")
+
+[node name="level3" parent="." instance=ExtResource("12_3so38")]
+position = Vector2(88, -18)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
@@ -59,6 +64,7 @@ shape = SubResource("RectangleShape2D_j5yw3")
 position = Vector2(-17, 117)
 
 [node name="Win" type="Label" parent="."]
+visible = false
 offset_left = 454.0
 offset_top = 282.0
 offset_right = 675.0
@@ -123,12 +129,29 @@ offset_right = 663.0
 offset_bottom = 520.0
 theme_override_fonts/font = ExtResource("4_kldst")
 theme_override_font_sizes/font_size = 30
-text = "Level 2"
+text = "Next Level"
 
 [node name="end_music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_fgofq")
+
+[node name="Pause" type="Button" parent="."]
+offset_left = 981.0
+offset_top = 603.0
+offset_right = 1025.0
+offset_bottom = 645.0
+theme_override_fonts/font = ExtResource("4_kldst")
+theme_override_font_sizes/font_size = 26
+text = "||"
+
+[node name="Pause2" parent="." instance=ExtResource("11_dahhg")]
+visible = false
+offset_left = 5.0
+offset_top = 8.0
+offset_right = 5.0
+offset_bottom = 8.0
 
 [connection signal="body_entered" from="Sprite2D/WinZone" to="." method="_on_win_zone_body_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Pause" to="." method="_on_pause_pressed"]
